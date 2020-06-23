@@ -1,0 +1,57 @@
+body{
+  width: auto;
+  margin: auto;
+  background-color: #161026;
+  align-content: center;
+}
+
+h2,h4{
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+}
+
+#title{
+  font-size: 100px;
+  color: #F2EFC2;
+  letter-spacing: 0.2em;
+  line-height: 0.0;
+  word-spacing: 1em;
+}
+
+#assignment{
+  font-size: 20px;
+  color: #888D99;
+  letter-spacing: 0.05em;
+  word-spacing: 0.05em;
+}
+
+#theGame{
+  width: 100%;
+  text-align: center;
+}
+
+#ship{
+  display: none;
+}
+
+#astronaut{
+  display: none;
+}
+
+#astronaut2{
+  display: none;
+}
+
+#astronaut3{
+  display: none;
+}
+
+#canvas{
+  border: 2px transparent;
+  background-color: #804799;
+}
+
+canvas{
+  display: inline;
+  margin-bottom: 25px;
+}
