@@ -77,7 +77,7 @@ function createStars(point, width, height, dx, dy){
   if (dy === undefined) {
     dy = 0;
   }
-  var obj = {
+  var stardj = {
     corner: point,
     width: width,
     height: height,
@@ -93,7 +93,7 @@ function createStars(point, width, height, dx, dy){
       g.context.stroke();
     }
   };
-  return obj;
+  return stardj;
 }
 
 function keyDownhandler(event) {
@@ -160,8 +160,8 @@ function gameStep() {
     i = 0;
     while (i < g.stars.length) {
       g.stars[i].move();
-      i++;
     }
+    i++;
     var rndStarNum = (Math.random() * (10 - 2) + 2);
     var randomSpeed = (Math.random() * (4 - 1) + 1);
     g.ship.move();
@@ -172,7 +172,10 @@ function gameStep() {
   setTimeout(gameStep, g.delay);
 }
 
+
+//renders game after space
 function render() {
+  //whatever is draw is cleared before the next frame 
   g.context.clearRect(0, 0, g.canvas.width, g.canvas.height);
   g.ship.draw();
   var i;
@@ -181,11 +184,14 @@ function render() {
     g.astronauts[i].draw();
     i++;
   }
+  //once space is pressed the stars will still draw
   i = 0;
   while (i < g.stars.length) {
     g.stars[i].starDraw();
     i++;
   }
+
+  //how many astronauts left on the top right corner
   g.context.font = "20px Quicksand";
   g.context.fillStyle = "#F2EFC2";
   g.context.textAlign = "center";
@@ -212,7 +218,8 @@ function alwaysDraw() {
     g.context.fillText("Press space to start", g.canvas.width/2, g.canvas.height/2);
     g.context.fillText("Left and Right arrow keys to move", g.canvas.width/2, g.canvas.height/4);
     g.context.fillText("Save " + g.goal + " astronauts", g.canvas.width/2, g.canvas.height/4.85);
-    setTimeout(alwaysDraw, 20);
+    //so that it's drawing it in every 20 milliseconds wile the game state is false
+    setTimeout(alwaysDraw, 7);
   }
   if (g.gameOn === true) {
     gameStep();
@@ -222,11 +229,11 @@ function alwaysDraw() {
 function youWin() {
   if (saved === g.goal){
     g.gameOn = false;
-    var i;
     var rndStarNum = (Math.random() * (10 - 2) + 2);
     var randomSpeed = (Math.random() * (4 - 1) + 1);
     g.context.clearRect(0, 0, g.canvas.width, g.canvas.height);
     g.ship.draw();
+    //keeps populating the array
     g.stars.push(createStars(starStart(), 1, rndStarNum, 0, 1 + randomSpeed));
     i = 0;
     while (i < g.stars.length) {
@@ -240,7 +247,7 @@ function youWin() {
     g.context.fillText("You saved them!", g.canvas.width/2, g.canvas.height/2);
     g.ship.dy--;
   }
-  setTimeout(youWin, 40);
+  setTimeout(youWin, 5);
 }
 
 function distance(p0, p1) {
